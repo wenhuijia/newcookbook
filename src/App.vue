@@ -2,7 +2,6 @@
   <div id="app">
    
     <router-view/>
-    选中的是：{{selected}}
     <mt-tabbar v-model="selected" fixed>
       <router-link to="/home">
       <mt-tab-item v-bind:class="{clickColor:actionColor.home}" id="home">
@@ -65,11 +64,10 @@
     },
     watch: {
       selected: function (val, oldVal) {
+        console.log(val)
       },
       $route:function(newVal,oldVal){
-          console.log(typeof newVal)
           for(var key in this.actionColor){
-            console.log(key)
             if(newVal.path.indexOf(key)!=-1){
               this.actionColor[key]=true;
             }else{
@@ -104,4 +102,5 @@
   .clickColor{
     color: red;
   }
+ 
 </style>
