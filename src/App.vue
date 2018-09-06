@@ -1,8 +1,14 @@
 <template>
   <div id="app">
-   
+    <div>{{navTitle}}</div>
+    <mt-header class="myHeader hide" v-show="isHide" fixed :title="navTitle">
+    <router-link to="/" slot="left">
+      <mt-button @click="goBack" class="iconfont icon-jiantou-zuo"></mt-button>
+    </router-link>
+
+</mt-header>
     <router-view/>
-    <mt-tabbar v-model="selected" fixed>
+    <mt-tabbar v-show="!isHide" v-model="selected" fixed>
       <router-link to="/home">
       <mt-tab-item v-bind:class="{clickColor:actionColor.home}" id="home">
         <span slot="icon"  class="iconfont icon-Home "></span>
@@ -39,17 +45,21 @@
 
 <script>
   import './assets/icon/iconfont.css';
+  import './assets/css/public.css';
+  import bus from '../src/assets/js/common.js'
   export default {
     data(){
       return {
-         actionColor:{
-           home:true,
-           city:false,
-           find:false,
-           other:false,
-           mine:false,
-         },
-        selected: '发现'
+          actionColor:{
+            home:true,
+            city:false,
+            find:false,
+            other:false,
+            mine:false,
+          },
+          selected: '发现',
+          isHide:false,
+          navTitle:"999"
       }
     },
     methods:{
@@ -58,29 +68,54 @@
         },
         dd(){
           this.aaa = !this.aaa;
+        },
+        goBack(){
+           this.$router.go(-1);
         }
     },
     created(){
+      const _this = this;
+      //解决刷新后路由监控失效问题
+      if(this.$route.name=="home"||this.$route.name=="city"||this.$route.name=="find"||this.$route.name=="other"||this.$route.name=="mine"){
+            this.isHide = false;
+          }else{
+            this.isHide = true;
+      };
+      bus.$on('setTitleBus', function(badgeValueid){
+        console.log("badgeValueid",badgeValueid)
+        _this.navTitle = badgeValueid;
+      });
     },
     watch: {
       selected: function (val, oldVal) {
         console.log(val)
       },
       $route:function(newVal,oldVal){
+        // console.log(newVal,oldVal)
           for(var key in this.actionColor){
             if(newVal.path.indexOf(key)!=-1){
               this.actionColor[key]=true;
             }else{
               this.actionColor[key]=false;
             }
-          }
+          };
+          if(newVal.path=="/home"||newVal.path=="/city"||newVal.path=="/find"||newVal.path=="/other"||newVal.path=="/mine"){
+            this.isHide = false;
+          }else{
+            this.isHide = true;
+          };
+          // if(newVal.path=="/cookClass"){
+          //   this.navTitle = "菜品分类";
+          // }else if(newVal.path=="/city"){
+          //   this.navTitle = "城市";
+          // }
       }
     },
     name: "App"
   };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .aaa{
     width: 3.75rem;
     background: #000;
@@ -102,5 +137,9 @@
   .clickColor{
     color: red;
   }
- 
+  .myHeader{
+    background: #fff;
+    color: #333;
+  }
+  
 </style>
