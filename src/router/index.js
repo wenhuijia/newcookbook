@@ -9,6 +9,7 @@ import mine from '@/components/mine/mine'
 import cookClass from '@/components/cookClass/cookClass'
 import cookClass_2 from '@/components/cookClass/cookClass_2'
 import cookClass_3 from '@/components/cookClass/cookClass_3'
+import cookDetails from '@/components/cookClass/cookDetails'
 
 Vue.use(Router)
 
@@ -30,14 +31,19 @@ export default new Router({
       component: cookClass
     },
     {
-      path: '/cookClass_2/:id',
+      path: '/cookClass_2',
       name: 'cookClass_2',
       component: cookClass_2
     },
     {
-      path: '/cookClass_3/:id',
+      path: '/cookClass_3',
       name: 'cookClass_3',
       component: cookClass_3
+    },
+    {
+      path: '/cookDetails',
+      name: 'cookDetails',
+      component: cookDetails
     },
     {
       path: '/city',

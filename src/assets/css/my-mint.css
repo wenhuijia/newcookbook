@@ -1,3 +1,4 @@
+/* 覆盖mint 及 ydui 样式专用 */
 .mint-searchbar{
     background: #f2d707;
  }
@@ -7,3 +8,15 @@
  .mint-searchbar-cancel{
      color: #fff;
  }
+ .mint-tab-item-label{
+    font-size: 0.32rem;
+    /* color: #333; */
+ }
+ .mint-navbar .mint-tab-item.is-selected {
+    border-bottom: 1px solid #ef4f4f;
+    color: #ef4f4f;
+    margin-bottom: -3px;
+}
+body{
+    background: #fff;
+}

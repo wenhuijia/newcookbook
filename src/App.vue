@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <div>{{navTitle}}</div>
     <mt-header class="myHeader hide" v-show="isHide" fixed :title="navTitle">
     <router-link to="/" slot="left">
       <mt-button @click="goBack" class="iconfont icon-jiantou-zuo"></mt-button>
@@ -116,6 +115,9 @@
 </script>
 
 <style lang="scss" scoped>
+  body{
+    background: #fff;
+  }
   .aaa{
     width: 3.75rem;
     background: #000;
@@ -140,6 +142,7 @@
   .myHeader{
     background: #fff;
     color: #333;
+    font-size: 0.34rem;
   }
   
 </style>

@@ -1,59 +1,122 @@
 <template>
   <div>
       <div class="bigBox">
-          <div class="hotClass">
-              <p class="hotClassTitle">热门分类</p>
-              <ul v-for="(item,index) in cidData" v-bind:key="index">
-                  <!-- <router-link :to="'/cookClass_2/'+item.parentId"> -->
-                    <li :id="item.id" ><p>{{item.name}}</p></li>
-                  <!-- </router-link> -->
+         <mt-navbar v-model="selected">
+          <mt-tab-item class="myTitle" id="1">智能推荐</mt-tab-item>
+          <mt-tab-item id="2">评分最多</mt-tab-item>
+          <mt-tab-item id="3">做过最多</mt-tab-item>
+        </mt-navbar>
+
+        <!-- tab-container -->
+        <mt-tab-container v-model="selected">
+          <mt-tab-container-item id="1">
+            <div class="myContent">
+              <ul v-for="(item,index) in cidData" :key="index">
+                <router-link :to="{path:'/cookDetails',query:{id:item.id,title:item.title}}">
+                <li>
+                  <img class="fl" :src="item.albums[0]" alt="">
+                  <div class="contentSub fl">
+                    <p class="contentSubTitle">{{item.title}}</p>
+                    <p class="contentSubName">{{item.ingredients}}</p>
+                    <p class="contentSubMessage"><span>4.8分</span>&nbsp;<span>58人做过</span></p>
+                  </div>
+                </li>
+                </router-link>
               </ul>
-          </div>
+            </div>
+          </mt-tab-container-item>
+          <mt-tab-container-item id="2">
+           2
+          </mt-tab-container-item>
+          <mt-tab-container-item id="3">
+           3
+          </mt-tab-container-item>
+        </mt-tab-container>
       </div>
-      <button @click="aa">点我2222</button>
   </div>
 </template>
 <script>
+import bus from "../../assets/js/common.js";
 export default {
   data() {
     return {
       jsonData: [],
-      cidData:[],
-      cid: ""
+      cidData: [],
+      cid: "",
+      selected:"1"
     };
   },
   created() {
     this.jsonData = this.$jsData.cookList;
-    this.cid = this.$route.params.id;
-    this.getData();
+    this.cidData = this.$jsData.cidList;
+    this.cid = this.$route.query.id;
+    bus.$emit("setTitleBus", this.$route.query.title);
+    console.log(this.cidData)
+    // this.getData();
   },
   methods: {
-    aa() {
-    },
+    aa() {},
     getData() {
-        console.log("aa",this.cid)
-      var url = "/api/cook/index?key=b63137a192f9b1051023d19222402c3f&cid="+this.cid;
+      console.log("aa", this.cid);
+      var url =
+        "/api/cook/index?key=b63137a192f9b1051023d19222402c3f&cid=" + this.cid;
       this.$axios
         .get(url)
-        .then((data)=> {
-            console.log(data)
+        .then(data => {
+          console.log(data);
           if (data.status == 200) {
             this.cidData = data.data.result.data;
-            console.log("vv",JSON.stringify(this.cidData))
-            
+            // console.log("vv", this.cidData);
+            console.log("vv", JSON.stringify(this.cidData));
           }
         })
-        .catch((err)=> {
+        .catch(err => {
           console.log(err);
         });
-    }
+    },
   }
 };
 </script>
 
 <style lang="scss" scoped>
 .bigBox {
-  margin-top: 1.08rem;
+  margin-top: 0.88rem;
+}
+.myContent{
+  width: 100%;
+  padding: 0 0.3rem;
+  li{
+    height: 2rem;
+    margin-top: 0.3rem;
+    img{
+      height: 2rem;
+      width: 2rem;
+      border-radius: 0.1rem;
+    }
+    .contentSub{
+      margin-left: 0.3rem;
+      width: 4.5rem;
+       p{
+          color: #333;
+       }
+       p:nth-of-type(1){
+         font-size: 0.4rem;
+         font-weight: 700;
+         line-height: 0.52rem;
+       }
+       p:nth-of-type(2){
+         font-size: 0.24rem;
+         line-height: 0.6rem;
+         color: #666;
+       }
+       p:nth-of-type(3){
+         font-size: 0.3rem;
+         line-height: 0.4rem;
+         color: #333;
+       }
+    }
+   
+  }
 }
 .hotClass {
   .hotClassTitle {
@@ -87,4 +150,6 @@ export default {
     }
   }
 }
+
+
 </style>

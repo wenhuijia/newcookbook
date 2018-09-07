@@ -4,16 +4,17 @@
           <div class="hotClass">
               <p class="hotClassTitle">热门分类</p>
               <ul v-for="(item,index) in parentidData" v-bind:key="index">
-                  <router-link :to="'/cookClass_3/'+item.id">
+                  <!-- <router-link :to="'/cookClass_3/'+item.id"> -->
+                  <router-link :to="{path:'/cookClass_3',query:{id:item.id,title:item.name}}">
                     <li :id="item.id" ><p>{{item.name}}</p></li>
                   </router-link>
               </ul>
           </div>
       </div>
-      <button @click="aa">点我2222</button>
   </div>
 </template>
 <script>
+import bus from "../../assets/js/common.js"
 export default {
   data() {
     return {
@@ -23,16 +24,14 @@ export default {
     };
   },
   created() {
-     this.jsonData = this.$jsData.cookList;
-    this.parentid = this.$route.params.id;
-    this.getData();
+    this.jsonData = this.$jsData.cookList;
+    this.parentid = this.$route.query.id;
+    // this.getData();
+    bus.$emit('setTitleBus', this.$route.query.title);
+    this.renderData();
   },
   methods: {
-    aa() {
-      console.log(this.$jsonData);
-    },
     getData() {
-        console.log(this.parentid)
       var url = "/api/cook/category?key=b63137a192f9b1051023d19222402c3f&parentid="+this.parentid;
       this.$axios
         .get(url)
@@ -45,7 +44,15 @@ export default {
         .catch((err)=> {
           console.log(err);
         });
+    },
+    renderData(){
+      this.jsonData.forEach((v,i)=>{
+        if(v.parentId==this.parentid){
+              this.parentidData = v.list;
+        }
+      });
     }
+    
   }
 };
 </script>

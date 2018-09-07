@@ -4,7 +4,9 @@
           <div class="hotClass">
               <p class="hotClassTitle">热门分类</p>
               <ul v-for="(item,index) in jsonData" v-bind:key="index">
-                  <router-link :to="'/cookClass_2/'+item.parentId">
+                  <!-- <router-link :to="{ path: '/news', query: { userId: 1111}}">click to news page</router-link> -->
+                  <!-- <router-link :to="'/cookClass_2/'+item.parentId"> -->
+                  <router-link :to="{path:'/cookClass_2',query:{id:item.parentId,title:item.name}}">
                     <li :id="item.parentId" ><p>{{item.name}}</p></li>
                   </router-link>
               </ul>
@@ -33,7 +35,7 @@ export default {
         aa(){
         },
         setTitle(){
-            bus.$emit('setTitleBus', this.cookTitle);
+            bus.$emit('setTitleBus', "菜谱分类");
         }
     }
 }
