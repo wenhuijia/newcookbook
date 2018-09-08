@@ -63,7 +63,6 @@
     },
     methods:{
         reid(){
-            console.log(this.value)
         },
         dd(){
           this.aaa = !this.aaa;
@@ -81,16 +80,13 @@
             this.isHide = true;
       };
       bus.$on('setTitleBus', function(badgeValueid){
-        console.log("badgeValueid",badgeValueid)
         _this.navTitle = badgeValueid;
       });
     },
     watch: {
       selected: function (val, oldVal) {
-        console.log(val)
       },
       $route:function(newVal,oldVal){
-        // console.log(newVal,oldVal)
           for(var key in this.actionColor){
             if(newVal.path.indexOf(key)!=-1){
               this.actionColor[key]=true;
@@ -98,16 +94,14 @@
               this.actionColor[key]=false;
             }
           };
-          if(newVal.path=="/home"||newVal.path=="/city"||newVal.path=="/find"||newVal.path=="/other"||newVal.path=="/mine"){
+          if(newVal.path=="/"){
+            this.actionColor.home = true;
+          };
+          if(newVal.path=="/"||newVal.path=="/home"||newVal.path=="/city"||newVal.path=="/find"||newVal.path=="/other"||newVal.path=="/mine"){
             this.isHide = false;
           }else{
             this.isHide = true;
           };
-          // if(newVal.path=="/cookClass"){
-          //   this.navTitle = "菜品分类";
-          // }else if(newVal.path=="/city"){
-          //   this.navTitle = "城市";
-          // }
       }
     },
     name: "App"

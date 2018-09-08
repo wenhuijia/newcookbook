@@ -26,19 +26,22 @@
                 <p class="stepTop">步骤{{index+1}}</p>
                 <!-- <img :src="item.img" alt=""> -->
                 <yd-lightbox>
-                  <yd-lightbox-img class="topImg" :src="item.img"></yd-lightbox-img>
+                  <yd-lightbox-img class="topImg" v-lazy="item.img"></yd-lightbox-img>
                 </yd-lightbox>
                 <p class="stepMsg">{{item.step}}</p>
               </li>
             </ul>
           </div>
+          <comment :cookTitle="this.$route.query.title"></comment>
         </div>
+        
       </div>
       
   </div>
 </template>
 <script>
 import bus from "../../assets/js/common.js";
+import comment from "../../components/subComponents/comment.vue";
 export default {
   data() {
     return {
@@ -85,6 +88,10 @@ export default {
       });
       console.log(this.renderData)
     }
+  },
+  //注册子组件
+  components:{
+    comment
   }
 };
 </script>
@@ -174,4 +181,11 @@ export default {
     }
   }
 }
+img[lazy=loading] {
+  height: 2rem;
+  width: 2rem;
+  margin: auto;
+  background: #333;
+}
+
 </style>

@@ -9,7 +9,8 @@
      color: #fff;
  }
  .mint-tab-item-label{
-    font-size: 0.32rem;
+    font-size: 0.28rem;
+    line-height: 0.40rem;
     /* color: #333; */
  }
  .mint-navbar .mint-tab-item.is-selected {
@@ -19,4 +20,16 @@
 }
 body{
     background: #fff;
+}
+.yd-cell{
+    border: 1px solid #f4f4f4;
+}
+.yd-cell-title{
+    padding: 0;
+    padding-bottom: 0.2rem;
+    font-weight: 700;
+}
+.yd-btn-warning{
+    font-size: 0.38rem;
+    font-weight: 700;
 }

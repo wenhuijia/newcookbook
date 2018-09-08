@@ -14,7 +14,7 @@
               <ul v-for="(item,index) in cidData" :key="index">
                 <router-link :to="{path:'/cookDetails',query:{id:item.id,title:item.title}}">
                 <li>
-                  <img class="fl" :src="item.albums[0]" alt="">
+                  <img class="fl" v-lazy="item.albums[0]" alt="">
                   <div class="contentSub fl">
                     <p class="contentSubTitle">{{item.title}}</p>
                     <p class="contentSubName">{{item.ingredients}}</p>
@@ -150,6 +150,11 @@ export default {
     }
   }
 }
-
+img[lazy=loading] {
+  height: 2rem;
+  width: 2rem;
+  margin: auto;
+  background: #333;
+}
 
 </style>
