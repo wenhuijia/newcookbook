@@ -1,6 +1,6 @@
 <template>
   <div>
-    <mt-search  cancel-text="取消" placeholder="搜索菜谱"></mt-search>
+    <search></search>
     <div class="my_swipe">
       <mt-swipe :auto="3000">
         <mt-swipe-item v-for="(item,index) in imgData" :key="index">
@@ -13,7 +13,9 @@
           <router-link to="/cookClass">
           <li class="clearfix"><i class="iconfont icon-913caidan_shengming"></i><p>菜谱分类</p></li>
           </router-link>
+          <router-link to='/login'>
           <li class="clearfix"><i class="iconfont icon-qita"></i><p>菜谱分类</p></li>
+          </router-link>
           <li class="clearfix"><i class="iconfont icon-qita"></i><p>菜谱分类</p></li>
           <li class="clearfix"><i class="iconfont icon-qita"></i><p>菜谱分类</p></li>
         </ul>
@@ -27,6 +29,8 @@
 </template>
 
 <script>
+import search from '../subComponents/search.vue';
+
 export default {
   data() {
     return {
@@ -35,7 +39,7 @@ export default {
         { url: require("../../assets/images/2.jpg") },
         { url: require("../../assets/images/3.jpg") }
       ],
-    
+      
     };
   },
   methods: {
@@ -66,7 +70,11 @@ export default {
         .catch(function(err) {
           console.log(err);
         });
-    }
+    },
+   
+  },
+  components:{
+    search
   }
 };
 </script>

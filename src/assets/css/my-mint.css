@@ -3,10 +3,14 @@
     background: #f2d707;
  }
  .mint-searchbar-core{
-   color: red;
+   color: #333;
+   font-size: 0.3rem;
  }
  .mint-searchbar-cancel{
      color: #fff;
+ }
+ .mint-search{
+    height: 100%;
  }
  .mint-tab-item-label{
     font-size: 0.28rem;
@@ -30,6 +34,7 @@ body{
     font-weight: 700;
 }
 .yd-btn-warning{
-    font-size: 0.38rem;
-    font-weight: 700;
+    font-size: 0.3rem;
+    font-weight: 400;
+    margin-top: 0.2rem;
 }

@@ -23,6 +23,17 @@ import 'mint-ui/lib/style.css';
 import './assets/css/my-mint.css';//引入自定义样式复盖mint样式 
 import './assets/js/json'; 
 
+//路由元信息
+router.beforeEach((to, from, next) => {
+  // console.log("to",to.path)
+  // console.log("from",from)
+  var isLogin = sessionStorage.getItem("userName");
+  if(!isLogin&&to.path!="/login"){ 
+    next("/login");
+  }else{
+    next();
+  }
+})
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

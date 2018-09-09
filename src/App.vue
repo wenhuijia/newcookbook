@@ -79,6 +79,9 @@
           }else{
             this.isHide = true;
       };
+      if(this.$route.name=="login"){
+        this.isHide = false;
+      }
       bus.$on('setTitleBus', function(badgeValueid){
         _this.navTitle = badgeValueid;
       });

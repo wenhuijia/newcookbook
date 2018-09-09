@@ -103,6 +103,7 @@
    }
 </style>
 <script>
+import { Toast } from 'mint-ui';//要引入
 export default {
   data() {
     return {
@@ -132,8 +133,12 @@ export default {
                 msgTime:"2018-08-22 10:22:36",
                 msgAgree:"0"
         };
-        this.msg.unshift(newData);
-        this.$refs.textAreaRef.value ="";
+        if(content){
+            this.msg.unshift(newData);
+            this.$refs.textAreaRef.value ="";
+        }else{
+            Toast('评论内容不能为空！');
+        }
     }
   },
   props:['cookTitle']//父传子 由cookDetails.vue传入

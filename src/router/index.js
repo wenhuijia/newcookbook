@@ -10,6 +10,9 @@ import cookClass from '@/components/cookClass/cookClass'
 import cookClass_2 from '@/components/cookClass/cookClass_2'
 import cookClass_3 from '@/components/cookClass/cookClass_3'
 import cookDetails from '@/components/cookClass/cookDetails'
+import login from '@/components/login/login'
+import searchPage from '@/components/search/searchPage'
+
 
 Vue.use(Router)
 
@@ -64,6 +67,16 @@ export default new Router({
       path: '/mine',
       name: 'mine',
       component: mine
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: login
+    },
+    {
+      path: '/searchPage',
+      name: 'searchPage',
+      component: searchPage
     }
   ]
 })
