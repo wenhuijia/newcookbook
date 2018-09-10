@@ -37,6 +37,7 @@
 </template>
 <script>
 import bus from "../../assets/js/common.js";
+import { Toast } from 'mint-ui';//要引入
 export default {
   data() {
     return {
@@ -48,18 +49,39 @@ export default {
   },
   created() {
     this.jsonData = this.$jsData.cookList;
-    this.cidData = this.$jsData.cidList;
+    if(this.$route.query.menu){
+      this.cidData = this.$jsData.queryData;
+    }else{
+      this.cidData = this.$jsData.cidList;
+    }
     this.cid = this.$route.query.id;
     bus.$emit("setTitleBus", this.$route.query.title);
-    console.log(this.cidData)
+
     // this.getData();
+    // this.queryData();
   },
   methods: {
     aa() {},
     getData() {
-      console.log("aa", this.cid);
       var url =
         "/api/cook/index?key=b63137a192f9b1051023d19222402c3f&cid=" + this.cid;
+      this.$axios
+        .get(url)
+        .then(data => {
+          if (data.status == 200) {
+            this.cidData = data.data.result.data;
+            // console.log("vv", this.cidData);
+            console.log("vv", JSON.stringify(this.cidData));
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    //查询菜谱
+    queryData(){
+      var url =
+        "/api/cook/query?key=b63137a192f9b1051023d19222402c3f&menu=" + "排骨"+"&rn=10";
       this.$axios
         .get(url)
         .then(data => {
@@ -73,7 +95,7 @@ export default {
         .catch(err => {
           console.log(err);
         });
-    },
+    }
   }
 };
 </script>

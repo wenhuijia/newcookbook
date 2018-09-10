@@ -21,8 +21,7 @@
         </ul>
     </div>
     <div>
-      <button @click="button">点我</button>
-      <button @click="button2">点我22</button>
+
     </div>
     
   </div>
@@ -43,35 +42,7 @@ export default {
     };
   },
   methods: {
-    button: function() {
-      var url = "/api/cook/category?key=b63137a192f9b1051023d19222402c3f";
-      this.$axios
-        .get(url)
-        .then(function(data) {
-          if(data.status==200){
-            // console.log(data.data.result)
-            console.log(JSON.stringify(data.data.result))
-          }
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
-    },
-      button2: function() {
-      var url = "/api/cook/query?key=b63137a192f9b1051023d19222402c3f&menu=茄子";
-      this.$axios
-        .get(url)
-        .then(function(data) {
-          if(data.status==200){
-            console.log(data.data.result)
-            // console.log(JSON.stringify(data.data.result))
-          }
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
-    },
-   
+
   },
   components:{
     search

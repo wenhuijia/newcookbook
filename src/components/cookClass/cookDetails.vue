@@ -59,6 +59,7 @@ export default {
     bus.$emit("setTitleBus", this.$route.query.title);
     this.renderHmtl();
     // this.getData();
+    console.log("ccc",this.renderData)
   },
   methods: {
     aa() {},

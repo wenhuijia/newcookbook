@@ -12,7 +12,6 @@
               </ul>
           </div>
       </div>
-      <button @click="setTitle">点我</button>
   </div>
 </template>
 <script>
@@ -29,7 +28,6 @@ export default {
         this.jsonData = this.$jsData.cookList;
         console.log(this.jsonData);
         console.log(this.navTitle);
-        this.setTitle();
     },
     methods:{
         aa(){

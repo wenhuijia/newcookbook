@@ -26,6 +26,7 @@
   
 </style>
 <script>
+import { Toast } from 'mint-ui';//要引入
 export default {
   data() {
     return {
@@ -42,13 +43,19 @@ export default {
   },
   methods: {
      search(value){
-      this.$router.push({path:"/cookClass_3"})
+       if(value){
+        
+        this.searchVal = value ;
+        this.$emit('searchCook',this.searchVal);//$emit这是vue提供的子传值给父的方法
+        this.$router.push({path:"/cookClass_3",query:{"menu":value,"title":value}}); 
+       }else{
+         Toast('搜索内容不能为空');
+       }
     },
     showContent(){
     
       this.isShow = true;
       this.isCancel = true;
-      console.log(this.$route.name)
       if(this.$route.name!="searchPage" && this.$route.name!="cookClass_3"){
         // alert("2")
         this.$router.push({path:"/searchPage"})
