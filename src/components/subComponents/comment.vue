@@ -4,7 +4,7 @@
             <div  class="commentTitle"><p class="fl">{{this.cookTitle}}的评论</p><p class="fr"><span>{{this.msg.length}}</span><span>条留言</span></p></div>
             <ul v-for="(item,index) in msg" :key="index">
                 <li>
-                    <p class="clearfix"><img src="../../assets/images/1.jpg" alt=""><span class="commentName fl">{{item.msgName}}</span><span class="fr"><i class="iconfont icon-qita"></i><span class="approve">{{item.msgAgree}}</span></span></p>
+                    <p class="clearfix"><img src="../../assets/images/1.jpg" alt=""><span class="commentName fl">{{item.msgName}}</span><span class="fr"><i class="iconfont icon-dianzan"></i><span class="approve">{{item.msgAgree}}</span></span></p>
                     <p class="commentMsg">{{item.msgContent}}</p>
                     <p class="commentTime">{{item.msgTime}}</p>
                 </li>
@@ -88,7 +88,7 @@
    }
    .commentFooter{
        margin-top: 0.5rem;
-       padding-bottom: 0.5rem;
+       padding-bottom: 1.4rem;
    }
    .footerTitle{
        font-size: 0.3rem;

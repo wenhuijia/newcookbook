@@ -36,10 +36,15 @@
         </div>
         
       </div>
-      
+      <!-- :class="{changeColor:isCollect}" -->
+      <div class="bottonDiv">
+        <p @click="isCollectFun" class="changeColor" ><i :class="{'icon-shoucang':isCollect,'icon-shoucang1':!isCollect}" class="iconfont"></i><span :class="{changeColor:isCollect}">{{isCollect?"已收藏":"收藏"}}</span></p>
+        <p @click="clearCook"><i class="iconfont icon-zhaoxiangji"></i><span>传作品</span></p>
+      </div>
   </div>
 </template>
 <script>
+import { Toast } from 'mint-ui';//要引入
 import bus from "../../assets/js/common.js";
 import comment from "../../components/subComponents/comment.vue";
 export default {
@@ -49,7 +54,10 @@ export default {
       cidData: [],
       renderData:[],
       cid: "",
-      selected: "1"
+      selected: "1",
+      isCollect:false,
+      //保存的收藏收据
+      collectCookDataList:[]
     };
   },
   created() {
@@ -60,9 +68,11 @@ export default {
     this.renderHmtl();
     // this.getData();
     console.log("ccc",this.renderData)
+    console.log("bbb",JSON.parse(sessionStorage.getItem("collectCookData")))
+    this.collectCookDataList = JSON.parse(sessionStorage.getItem("collectCookData"))||[];
+    this.collectCookJudge();
   },
   methods: {
-    aa() {},
     getData() {
       console.log("aa", this.cid);
       var url =
@@ -88,6 +98,56 @@ export default {
         };
       });
       console.log(this.renderData)
+    },
+    isCollectFun(){
+      var collectCook = {"id":this.$route.query.id,"title":this.$route.query.title};
+      if(!this.isCollect){
+        if(this.collectCookDataList.length!=0){
+          var newArr = [];
+          this.collectCookDataList.forEach((v,i)=>{
+            if(v.id==collectCook.id){
+              newArr.push(v);
+            }
+          });
+          if(newArr.length==0){
+            this.collectCookDataList.unshift(collectCook);
+            Toast({message:'收藏成功！可在"我的——我的收藏"中查看哦~',position: 'bottom',});
+          };
+        }else{
+          this.collectCookDataList.unshift(collectCook);
+          Toast({message:'收藏成功！可在"我的——我的收藏"中查看哦~',position: 'bottom',});
+        };
+      }else{
+         if(this.collectCookDataList){
+          this.collectCookDataList.forEach((v,i)=>{
+            if(v.id==collectCook.id){
+              this.collectCookDataList.splice(i,1);
+            }else{
+            };
+          });
+         }
+      };
+      sessionStorage.setItem("collectCookData",JSON.stringify(this.collectCookDataList));
+      console.log("最终数据",sessionStorage.getItem("collectCookData"));
+      this.isCollect = !this.isCollect;
+      //状态管理方法 不实用
+      // this.$store.dispatch('collectCookFun',collectCook);//第一步 获取值 并传入mian.js 不能保存为本地数据;
+    },
+    collectCookJudge(){
+      if(this.collectCookDataList.length!=0){
+        this.collectCookDataList.forEach((v,i)=>{
+          console.log(v.id==this.$route.query.id)
+          if(v.id==this.$route.query.id){
+            this.isCollect = true;
+            return;
+          }
+        });
+      }
+      console.log("fasfsaf",this.isCollect)
+    },
+    clearCook(){
+      sessionStorage.removeItem("collectCookData");
+      Toast({message:'此功能正在开发中...',position: 'bottom',});
     }
   },
   //注册子组件
@@ -187,6 +247,35 @@ img[lazy=loading] {
   width: 2rem;
   margin: auto;
   background: #333;
+}
+.bottonDiv{
+  width: 100%;
+  height: 1rem;
+  border-top: 1px solid #f4f4f4;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: #fff;
+
+  p{
+    float: left;
+    line-height: 1rem;
+    color: #333;
+    font-size: 0.34rem;
+    margin-left: 1rem;
+    i{
+      font-size: 0.4rem;
+    }
+    span{
+      margin-left: 0.1rem;
+    }
+  }
+  p:nth-of-type(1){
+    color:#ef4f4f;
+  }
+  .changeColor{
+    color: #333;
+  }
 }
 
 </style>

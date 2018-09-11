@@ -32,8 +32,6 @@ export default {
     return {
       value:"",
       isShow:false,
-      latelySearch:["堙压标","堙压标"],
-      RecommendSearch:["排骨煲汤","排骨肉","排骨"],
       isCancel:false,
       focus:true
     };

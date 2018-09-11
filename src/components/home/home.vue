@@ -13,9 +13,7 @@
           <router-link to="/cookClass">
           <li class="clearfix"><i class="iconfont icon-913caidan_shengming"></i><p>菜谱分类</p></li>
           </router-link>
-          <router-link to='/login'>
           <li class="clearfix"><i class="iconfont icon-qita"></i><p>菜谱分类</p></li>
-          </router-link>
           <li class="clearfix"><i class="iconfont icon-qita"></i><p>菜谱分类</p></li>
           <li class="clearfix"><i class="iconfont icon-qita"></i><p>菜谱分类</p></li>
         </ul>
@@ -46,6 +44,9 @@ export default {
   },
   components:{
     search
+  },
+  created(){
+    
   }
 };
 </script>
