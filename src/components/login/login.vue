@@ -16,24 +16,27 @@
             </div>
             <yd-button class="" size="large" type="warning">注册</yd-button>
         </div>
+        <input v-model="input1" placeholder="请输入" type="text">
+        <input v-model="input2" placeholder="请输入" type="text">
+        <input v-model="input3" placeholder="请输入" type="text">
+        <div>{{exitsVal}}</div>
     </div>
 </div>
 </template>
 <style lang='scss' scoped>
-    .bigBox{
-        margin-top: 1.28rem;
-        .topTitle{
-            text-align: center;
-            font-size: 0.4rem;
-            line-height: 1rem;
-            color: #333;
-            border-bottom: 1px solid #f4f4f4;
-        }
-        .loginButton{
-            padding: 0 0.3rem;
-        }
-    }
-   
+.bigBox {
+  margin-top: 1.28rem;
+  .topTitle {
+    text-align: center;
+    font-size: 0.4rem;
+    line-height: 1rem;
+    color: #333;
+    border-bottom: 1px solid #f4f4f4;
+  }
+  .loginButton {
+    padding: 0 0.3rem;
+  }
+}
 </style>
 <script>
 import { Toast } from 'mint-ui';//要引入
@@ -43,10 +46,18 @@ export default {
         loginData:{
             name:"wenhuijia",
             pass:"123456"
-        }
-    };
+        },
+      input1:'',
+      input2:'',
+      input3:'',
+      ifExist:'',
+    }
   },
-  created() {},
+  created() {
+      console.log(null=="")
+      console.log(null==false)
+      console.log(""==false)
+  },
   methods: {
        goLoing(){
         let loginName = this.loginData.name;
@@ -63,7 +74,32 @@ export default {
         };
         sessionStorage.setItem("userName",loginName)
         this.$router.push({path:"/home"})
+      },
+
+      isVal(){
+          if(this.input1&&this.input2&&this.input3){//3个input都有值
+              this.ishide =true //显示或是隐藏
+          }else{
+              this.ishide =false //显示或是隐藏
+          }
+          console.log(this.ishide)
       }
-  }
-};
+
+  },
+ computed:{
+    exitsVal:function(){
+        this.ifExist=Number(Boolean(this.userName))+Number(Boolean(this.mailCode))+Number(Boolean(this.mailAd));
+    }
+  },
+    watch:{
+        // input1:function(a,b){
+        //     console.log(a,b)
+        //     console.log(this.input2)
+        // }
+    },
+    updated(){
+        this.isVal()
+        JSON.stringify
+    }
+}
 </script>

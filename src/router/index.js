@@ -12,7 +12,7 @@ import cookClass_3 from '@/components/cookClass/cookClass_3'
 import cookDetails from '@/components/cookClass/cookDetails'
 import login from '@/components/login/login'
 import searchPage from '@/components/search/searchPage'
-
+import collection from '@/components/collection/collection'
 
 Vue.use(Router)
 
@@ -77,6 +77,11 @@ export default new Router({
       path: '/searchPage',
       name: 'searchPage',
       component: searchPage
+    },
+    {
+      path: '/collection',
+      name: 'collection',
+      component: collection
     }
   ]
 })

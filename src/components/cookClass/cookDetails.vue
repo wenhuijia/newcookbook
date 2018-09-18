@@ -100,7 +100,9 @@ export default {
       console.log(this.renderData)
     },
     isCollectFun(){
-      var collectCook = {"id":this.$route.query.id,"title":this.$route.query.title};
+      let todyTime = new Date();
+      let nowTime = todyTime.getFullYear()+"-"+todyTime.getMonth()+"-"+todyTime.getDate() +" "+ todyTime.getHours() +":"+todyTime.getMinutes()+":"+todyTime.getSeconds()
+      var collectCook = {"id":this.$route.query.id,"title":this.$route.query.title,saveTime:nowTime};
       if(!this.isCollect){
         if(this.collectCookDataList.length!=0){
           var newArr = [];

@@ -10,7 +10,7 @@
         <!-- tab-container -->
         <mt-tab-container v-model="selected">
           <mt-tab-container-item id="1">
-            <div class="myContent">
+            <!-- <div class="myContent">
               <ul v-for="(item,index) in cidData" :key="index">
                 <router-link :to="{path:'/cookDetails',query:{id:item.id,title:item.title}}">
                 <li>
@@ -23,7 +23,9 @@
                 </li>
                 </router-link>
               </ul>
-            </div>
+            </div> -->
+            <!-- 更改变引入列表子组件 -->
+            <cook-list :cidData="this.cidData"></cook-list>
           </mt-tab-container-item>
           <mt-tab-container-item id="2">
            2
@@ -38,6 +40,7 @@
 <script>
 import bus from "../../assets/js/common.js";
 import { Toast } from 'mint-ui';//要引入
+import cookList from '../subComponents/cookList.vue'
 export default {
   data() {
     return {
@@ -96,6 +99,9 @@ export default {
           console.log(err);
         });
     }
+  },
+  components:{
+    cookList
   }
 };
 </script>
@@ -104,42 +110,42 @@ export default {
 .bigBox {
   margin-top: 0.88rem;
 }
-.myContent{
-  width: 100%;
-  padding: 0 0.3rem;
-  li{
-    height: 2rem;
-    margin-top: 0.3rem;
-    img{
-      height: 2rem;
-      width: 2rem;
-      border-radius: 0.1rem;
-    }
-    .contentSub{
-      margin-left: 0.3rem;
-      width: 4.5rem;
-       p{
-          color: #333;
-       }
-       p:nth-of-type(1){
-         font-size: 0.4rem;
-         font-weight: 700;
-         line-height: 0.52rem;
-       }
-       p:nth-of-type(2){
-         font-size: 0.24rem;
-         line-height: 0.6rem;
-         color: #666;
-       }
-       p:nth-of-type(3){
-         font-size: 0.3rem;
-         line-height: 0.4rem;
-         color: #333;
-       }
-    }
+// .myContent{
+//   width: 100%;
+//   padding: 0 0.3rem;
+//   li{
+//     height: 2rem;
+//     margin-top: 0.3rem;
+//     img{
+//       height: 2rem;
+//       width: 2rem;
+//       border-radius: 0.1rem;
+//     }
+//     .contentSub{
+//       margin-left: 0.3rem;
+//       width: 4.5rem;
+//        p{
+//           color: #333;
+//        }
+//        p:nth-of-type(1){
+//          font-size: 0.4rem;
+//          font-weight: 700;
+//          line-height: 0.52rem;
+//        }
+//        p:nth-of-type(2){
+//          font-size: 0.24rem;
+//          line-height: 0.6rem;
+//          color: #666;
+//        }
+//        p:nth-of-type(3){
+//          font-size: 0.3rem;
+//          line-height: 0.4rem;
+//          color: #333;
+//        }
+//     }
    
-  }
-}
+//   }
+// }
 .hotClass {
   .hotClassTitle {
     font-size: 0.4rem;
