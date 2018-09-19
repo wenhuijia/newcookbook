@@ -4,7 +4,6 @@ import HelloWorld from '@/components/HelloWorld'
 import home from '@/components/home/home'
 import city from '@/components/city/city'
 import find from '@/components/find/find'
-import other from '@/components/other/other'
 import mine from '@/components/mine/mine'
 import cookClass from '@/components/cookClass/cookClass'
 import cookClass_2 from '@/components/cookClass/cookClass_2'
@@ -59,9 +58,9 @@ export default new Router({
       component: find
     },
     {
-      path: '/other',
-      name: 'other',
-      component: other
+      path: '/collection',
+      name: 'collection',
+      component: collection
     },
     {
       path: '/mine',
@@ -78,10 +77,6 @@ export default new Router({
       name: 'searchPage',
       component: searchPage
     },
-    {
-      path: '/collection',
-      name: 'collection',
-      component: collection
-    }
+    
   ]
 })

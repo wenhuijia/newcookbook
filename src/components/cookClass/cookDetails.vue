@@ -57,7 +57,8 @@ export default {
       selected: "1",
       isCollect:false,
       //保存的收藏收据
-      collectCookDataList:[]
+      collectCookDataList:[],
+      cookHistory:{}
     };
   },
   created() {
@@ -66,25 +67,19 @@ export default {
     this.cid = this.$route.query.id;
     bus.$emit("setTitleBus", this.$route.query.title);
     this.renderHmtl();
-    // this.getData();
-    console.log("ccc",this.renderData)
-    console.log("bbb",JSON.parse(sessionStorage.getItem("collectCookData")))
     this.collectCookDataList = JSON.parse(sessionStorage.getItem("collectCookData"))||[];
     this.collectCookJudge();
+    this.saveHistory();
   },
   methods: {
     getData() {
-      console.log("aa", this.cid);
       var url =
         "/api/cook/queryid?key=b63137a192f9b1051023d19222402c3f&id=" + this.cid;
       this.$axios
         .get(url)
         .then(data => {
-          console.log("ddd", data);
           if (data.status == 200) {
             this.cidData = data.data.result.data;
-            // console.log("vv", this.cidData);
-            console.log("vv", JSON.stringify(this.cidData));
           }
         })
         .catch(err => {
@@ -97,7 +92,6 @@ export default {
           this.renderData = v;
         };
       });
-      console.log(this.renderData)
     },
     isCollectFun(){
       let todyTime = new Date();
@@ -113,11 +107,11 @@ export default {
           });
           if(newArr.length==0){
             this.collectCookDataList.unshift(collectCook);
-            Toast({message:'收藏成功！可在"我的——我的收藏"中查看哦~',position: 'bottom',});
+            Toast({message:'收藏成功！可在"收藏"中查看哦~',position: 'bottom',});
           };
         }else{
           this.collectCookDataList.unshift(collectCook);
-          Toast({message:'收藏成功！可在"我的——我的收藏"中查看哦~',position: 'bottom',});
+          Toast({message:'收藏成功！可在"收藏"中查看哦~',position: 'bottom',});
         };
       }else{
          if(this.collectCookDataList){
@@ -130,22 +124,28 @@ export default {
          }
       };
       sessionStorage.setItem("collectCookData",JSON.stringify(this.collectCookDataList));
-      console.log("最终数据",sessionStorage.getItem("collectCookData"));
       this.isCollect = !this.isCollect;
       //状态管理方法 不实用
-      // this.$store.dispatch('collectCookFun',collectCook);//第一步 获取值 并传入mian.js 不能保存为本地数据;
+      // this.$store.dispatch('collectCookFun',collectCook);//第一步 获取值 并传入mian.js 不能保存为本地数据 不怎么实用;
+    },
+    // 历史记录
+    saveHistory(){
+      let todyTime = new Date();
+      let nowTime = todyTime.getFullYear()+"-"+todyTime.getMonth()+"-"+todyTime.getDate() +" "+ todyTime.getHours() +":"+todyTime.getMinutes()+":"+todyTime.getSeconds()
+      this.cookHistory.id = this.$route.query.id;
+      this.cookHistory.time = nowTime;
+      //状态管理方法 不实用
+      this.$store.dispatch('saveHistoryFun',this.cookHistory);//第一步 获取值 并传入mian.js 不能保存为本地数据 不怎么实用;
     },
     collectCookJudge(){
       if(this.collectCookDataList.length!=0){
         this.collectCookDataList.forEach((v,i)=>{
-          console.log(v.id==this.$route.query.id)
           if(v.id==this.$route.query.id){
             this.isCollect = true;
             return;
           }
         });
       }
-      console.log("fasfsaf",this.isCollect)
     },
     clearCook(){
       sessionStorage.removeItem("collectCookData");

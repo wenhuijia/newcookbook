@@ -1,7 +1,7 @@
 <template>
   <div>
       <div class="bigBox">
-         <mt-navbar v-model="selected">
+        <mt-navbar v-model="selected">
           <mt-tab-item class="myTitle" id="1">智能推荐</mt-tab-item>
           <mt-tab-item id="2">评分最多</mt-tab-item>
           <mt-tab-item id="3">做过最多</mt-tab-item>
@@ -85,6 +85,7 @@ export default {
     queryData(){
       var url =
         "/api/cook/query?key=b63137a192f9b1051023d19222402c3f&menu=" + "排骨"+"&rn=10";
+        
       this.$axios
         .get(url)
         .then(data => {

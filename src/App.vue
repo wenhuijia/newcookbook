@@ -26,10 +26,10 @@
           发现
         </mt-tab-item>
       </router-link>
-      <router-link  to="/other">
-      <mt-tab-item v-bind:class="{clickColor:actionColor.other}" id="其他">
-        <span slot="icon" class="iconfont icon-qita"></span>       
-        其他
+      <router-link  to="/collection">
+      <mt-tab-item v-bind:class="{clickColor:actionColor.collection}" id="收藏">
+        <span slot="icon" class="iconfont icon-shoucang"></span>       
+        收藏
       </mt-tab-item>
       </router-link>
       <router-link  to="/mine">
@@ -53,7 +53,7 @@
             home:true,
             city:false,
             find:false,
-            other:false,
+            collection:false,
             mine:false,
           },
           selected: '发现',
@@ -74,10 +74,17 @@
     created(){
       const _this = this;
       //解决刷新后路由监控失效问题
-      if(this.$route.name=="home"||this.$route.name=="city"||this.$route.name=="find"||this.$route.name=="other"||this.$route.name=="mine"){
+      if(this.$route.name=="home"||this.$route.name=="city"||this.$route.name=="find"||this.$route.name=="collection"||this.$route.name=="mine"){
             this.isHide = false;
           }else{
             this.isHide = true;
+      };
+      for(var key in this.actionColor){
+        if(this.$route.path.indexOf(key)!=-1){
+          this.actionColor[key]=true;
+        }else{
+          this.actionColor[key]=false;
+        }
       };
       if(this.$route.name=="login"){
         this.isHide = false;
@@ -100,7 +107,7 @@
           if(newVal.path=="/"){
             this.actionColor.home = true;
           };
-          if(newVal.path=="/"||newVal.path=="/home"||newVal.path=="/city"||newVal.path=="/find"||newVal.path=="/other"||newVal.path=="/mine"){
+          if(newVal.path=="/"||newVal.path=="/home"||newVal.path=="/city"||newVal.path=="/find"||newVal.path=="/collection"||newVal.path=="/mine"){
             this.isHide = false;
           }else{
             this.isHide = true;

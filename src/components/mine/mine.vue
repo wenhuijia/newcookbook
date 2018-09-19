@@ -1,11 +1,10 @@
 <template>
   <div>
     <router-link to="/collection">
-        <yd-navbar title="我的收藏">
-            <div slot="right">
-                <yd-navbar-next-icon></yd-navbar-next-icon>
-            </div>
-        </yd-navbar> 
+        <div>
+            <p>我的收藏</p>
+            <p>共3道菜</p>
+        </div>
     </router-link>   
   </div>
 </template>

@@ -40,22 +40,58 @@ router.beforeEach((to, from, next) => {
 // npm install vuex --save
 const store = new Vuex.Store({ //记得要把store(仓库意思）) 注入到最下面的 根实例中去
   state: {
-    addCollectCookList:[]
+    addCollectCookList:[],
+    addHistoryCookList:[],
+    historyData:[]//最终历史数据
+
   },
   mutations: {//第三步 调用方法
     addCollectCook(state, collectCook) {//第一个值是仓库里面的值，第二个值是下面传入的值
       state.addCollectCookList.push(collectCook);
+    },
+    addHistoryCook(state,cookHistory){//第一个值是仓库里面的值，第二个值是下面传入的值
+      // state.addHistoryCookList.push(cookHistory);
+      if(state.addHistoryCookList.length!=0){
+        var flag = true;
+        state.addHistoryCookList.forEach((v,i)=>{
+          if(v.id!=cookHistory.id&&flag==true){
+            state.addHistoryCookList.unshift(cookHistory);
+            flag = false;
+          };
+        });
+       
+      }else{
+        state.addHistoryCookList.push(cookHistory);
+      }
+      //去重
+      var newArr = [];
+      var newArr2 =[];
+      state.addHistoryCookList.forEach((v,i)=>{
+        if(newArr.indexOf(v.id)==-1){
+          newArr.push(v.id)
+          newArr2.push({id:v.id,time:v.time})
+        }
+      })
+      console.log("newArr",newArr)
+      console.log("newArr2",newArr2)
+      state.historyData = newArr2;
     }
   },
-  getters: { //第四步  把值暴露为全局
+  getters: { //第四步  把仓库里面的值暴露为全局
     gitCollectCook(state) { //其他页面接收方法 this.$store.getters.gitCollectCook;
       return state;
-    }
+    },
+    gitHistoryCook(state) { //其他页面接收方法 this.$store.getters.gitHistoryCook;
+      return state;
+    },
   }, 
-  actions: { //异步
-    collectCookFun(context, collectCook) { //第二步 接收来自cookDetails.vue传过来的值  
+  actions: { //第二步 异步
+    collectCookFun(context, collectCook) { // 接收来自cookDetails.vue传过来的值  
       context.commit('addCollectCook', collectCook); //驱动 mutations 里面的方法
-    }
+    },
+    saveHistoryFun(context, cookHistory) { // 接收来自cookDetails.vue传过来的值  
+      context.commit('addHistoryCook', cookHistory); //驱动 mutations 里面的方法
+    },
   }
 })
 /* eslint-disable no-new */
