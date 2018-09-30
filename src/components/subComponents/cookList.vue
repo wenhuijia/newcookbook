@@ -1,7 +1,7 @@
 <template>
       <div class="myContent">
         <ul v-for="(item,index) in cidData" :key="index">
-        <router-link :to="{path:'/cookDetails',query:{id:item.id,title:item.title}}">
+        <router-link :to="{path:'/cookDetails',query:{id:item.id,title:item.title,page:page}}">
         <li>
             <img class="fl" v-lazy="item.albums[0]" alt="">
             <div class="contentSub fl">
@@ -31,6 +31,7 @@ export default {
         }else{
             this.isShow = false;
         }
+        this.page = this.$route.query.page;//解决早餐、午餐等问题
     },
     methods:{
         deleteCook(val){
@@ -73,6 +74,7 @@ export default {
          font-size: 0.24rem;
          line-height: 0.6rem;
          color: #666;
+         
        }
        p:nth-of-type(3){
          font-size: 0.3rem;
@@ -82,6 +84,10 @@ export default {
        .saveTime{
            margin-top: 0.15rem;
            color: #666;
+       }
+       .contentSubName{
+           line-height: 0.3rem !important;
+           margin: 0.1rem 0;
        }
     }
     i{

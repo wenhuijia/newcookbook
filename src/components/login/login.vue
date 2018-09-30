@@ -16,10 +16,6 @@
             </div>
             <yd-button class="" size="large" type="warning">注册</yd-button>
         </div>
-        <input v-model="input1" placeholder="请输入" type="text">
-        <input v-model="input2" placeholder="请输入" type="text">
-        <input v-model="input3" placeholder="请输入" type="text">
-        <div>{{exitsVal}}</div>
     </div>
 </div>
 </template>

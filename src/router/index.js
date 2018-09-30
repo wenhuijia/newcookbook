@@ -12,6 +12,7 @@ import cookDetails from '@/components/cookClass/cookDetails'
 import login from '@/components/login/login'
 import searchPage from '@/components/search/searchPage'
 import collection from '@/components/collection/collection'
+import pepperList from '@/components/echarts/pepperList'
 
 Vue.use(Router)
 
@@ -77,6 +78,11 @@ export default new Router({
       name: 'searchPage',
       component: searchPage
     },
+    {
+      path: '/pepperList',
+      name: 'pepperList',
+      component: pepperList
+    }
     
   ]
 })

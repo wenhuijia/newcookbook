@@ -14,6 +14,8 @@ Vue.use(Mint);
 Vue.config.productionTip = false;
 Vue.prototype.$axios=axios;
 
+import echarts from 'echarts' //引入echarts
+Vue.prototype.$echarts = echarts 
 
 import YDUI from 'vue-ydui'; /* 相当于import YDUI from 'vue-ydui/ydui.rem.js' */
 import 'vue-ydui/dist/ydui.rem.css';

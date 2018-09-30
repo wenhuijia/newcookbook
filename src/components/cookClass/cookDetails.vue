@@ -66,6 +66,14 @@ export default {
     this.cidData = this.$jsData.cidList;
     this.cid = this.$route.query.id;
     bus.$emit("setTitleBus", this.$route.query.title);
+    //解决中、午餐等页面问题
+    if(this.$route.query.page=="breakfast"){//早餐
+      this.cidData = this.$jsData.breakfast;
+    }else if(this.$route.query.page=="lunch"){
+      this.cidData = this.$jsData.lunch;
+    }else if(this.$route.query.page=="supper"){
+      this.cidData = this.$jsData.supper;
+    }
     this.renderHmtl();
     this.collectCookDataList = JSON.parse(sessionStorage.getItem("collectCookData"))||[];
     this.collectCookJudge();

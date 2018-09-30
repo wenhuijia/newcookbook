@@ -59,7 +59,16 @@ export default {
     }
     this.cid = this.$route.query.id;
     bus.$emit("setTitleBus", this.$route.query.title);
-
+    //早餐判断
+    if(this.$route.query.page){
+      if(this.$route.query.page=="breakfast"){//早餐
+        this.cidData = this.$jsData.breakfast;
+      }else if(this.$route.query.page=="lunch"){
+        this.cidData = this.$jsData.lunch;
+      }else if(this.$route.query.page=="supper"){
+        this.cidData = this.$jsData.supper;
+      }
+    }
     // this.getData();
     // this.queryData();
   },
